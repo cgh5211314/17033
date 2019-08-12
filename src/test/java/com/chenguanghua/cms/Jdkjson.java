@@ -38,14 +38,15 @@ public class Jdkjson {
 		// 使用RedisTemplate保存上述模拟的十万个user对象到Redis。
 		for (int i = 0; i < 100000; i++) {
 			list.add(new User(i, StringUtil.generateChineseName(), (RandomUitl.random(1, 2)) == 1 ? "男" : "女" + "",
-					"13" + RandomUitl.randomString(9), RandomUitl.random(3, 10) + "@qq.com",
+					"13" + RandomUitl.randomString(9), RandomUitl.random(3, 20) + "@qq.com",
 					RandomUitl.random(18, 70) + ""));
 		}
 		// 开始执行时间
 		long startTime = System.currentTimeMillis();
 		// 得到值
 		for (User user : list) {
-			redisTemplate.opsForValue().set("user=" + user.getId(), user);
+			redisTemplate.opsForValue().set("id=" + user.getId() + "name=" + user.getName() + "sex=" + user.getSex()
+					+ "phone=" + user.getPhone() + "youx=" + user.getYoux() + "birthday=" + user.getBirthday(), user);
 		}
 		// 结束执行时间
 		long endTime = System.currentTimeMillis();

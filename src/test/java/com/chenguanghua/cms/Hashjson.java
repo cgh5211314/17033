@@ -3,6 +3,7 @@
  */
 package com.chenguanghua.cms;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import javax.annotation.Resource;
@@ -32,12 +33,12 @@ public class Hashjson {
 
 	@Test
 	public void Hashtext() {
-		HashMap<String, Object> map = new HashMap<>();
+		HashMap<String, Serializable> map = new HashMap<>();
 		// 使用RedisTemplate保存上述模拟的十万个user对象到Redis。
 		for (int i = 0; i < 100000; i++) {
 			map.put("" + i,
 					new User(i, StringUtil.generateChineseName(), (RandomUitl.random(1, 2)) == 1 ? "男" : "女" + "",
-							"13" + RandomUitl.randomString(9), RandomUitl.random(3, 10) + "@qq.com",
+							"13" + RandomUitl.randomString(9), RandomUitl.random(3, 20) + "@qq.com",
 							RandomUitl.random(18, 70) + ""));
 		}
 		// 开始执行时间
@@ -47,7 +48,7 @@ public class Hashjson {
 		// 结束执行时间
 		long endTime = System.currentTimeMillis();
 		// 显示执行的时间
-		System.out.println("jdk执行的时间是" + (endTime - startTime));
+		System.out.println("hashjson执行的时间是" + (endTime - startTime));
 	}
 
 }
